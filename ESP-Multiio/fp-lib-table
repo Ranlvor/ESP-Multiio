@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name Switch)(type KiCad)(uri /home/keine-ahnung/workspace/hardware/ESP-Multiio/Switch.pretty)(options "")(descr ""))
+)
