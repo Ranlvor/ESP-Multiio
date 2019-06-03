@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name wemos_mini)(type Legacy)(uri /home/keine-ahnung/workspace/hardware/ESP-Cherry/d1_mini_kicad/library/wemos_mini.lib)(options "")(descr ""))
+  (lib (name TSOP1838)(type Legacy)(uri /home/keine-ahnung/workspace/hardware/ESP-Multiio/TSOP1838/TSOP1838.lib)(options "")(descr ""))
 )

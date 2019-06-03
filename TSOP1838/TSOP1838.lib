@@ -1,0 +1,38 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# TSOP1838
+#
+DEF TSOP1838 U 0 40 N Y 1 L N
+F0 "U" 0 0 50 H I L BNN
+F1 "TSOP1838" 0 0 50 H I L BNN
+F2 "TSOP18XX" 0 0 50 H I L BNN
+F3 "TSOP1838" 0 0 50 H I L BNN
+F4 "IR Remote Receiver 38KHz 35m 3-Pin" 0 0 50 H I L BNN
+F5 "Unavailable" 0 0 50 H I L BNN
+F6 "Vishay" 0 0 50 H I L BNN
+F7 "None" 0 0 50 H I L BNN
+F8 "None" 0 0 50 H I L BNN
+DRAW
+A -200 0 200 899 2700 0 0 10 N -200 -200 -200 200
+P 2 0 0 10 -600 0 -500 0 N
+P 2 0 0 10 -500 0 -700 200 N
+P 2 0 0 10 -600 0 -500 100 N
+P 2 0 0 10 -500 100 -500 0 N
+P 2 0 0 10 -600 400 -400 200 N
+P 2 0 0 10 -400 200 -400 300 N
+P 2 0 0 10 -400 300 -500 200 N
+P 2 0 0 10 -500 200 -400 200 N
+P 2 0 0 10 -200 300 100 300 N
+P 2 0 0 10 100 300 100 -300 N
+P 2 0 0 10 100 -300 -200 -300 N
+P 2 0 0 10 -200 -300 -200 300 N
+X GND GND 300 -200 200 L 40 40 0 0 B 
+X OUT OUT 300 0 200 L 40 40 0 0 B 
+X V+ VCC 300 200 200 L 40 40 0 0 B 
+ENDDRAW
+ENDDEF
+#
+# End Library
