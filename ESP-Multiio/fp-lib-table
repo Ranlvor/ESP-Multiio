@@ -1,4 +1,5 @@
 (fp_lib_table
   (lib (name Switch)(type KiCad)(uri /home/keine-ahnung/workspace/hardware/ESP-Multiio/Switch.pretty)(options "")(descr ""))
   (lib (name TSOP1838)(type Legacy)(uri /home/keine-ahnung/workspace/hardware/ESP-Multiio/TSOP1838/TSOP1838.mod)(options "")(descr ""))
+  (lib (name logo)(type KiCad)(uri /home/keine-ahnung/workspace/hardware/ESP-Multiio/logo)(options "")(descr ""))
 )
