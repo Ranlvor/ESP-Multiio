@@ -195,6 +195,8 @@
     (add_net "Net-(JP-INTB1-Pad2)")
     (add_net "Net-(Q1-Pad1)")
     (add_net "Net-(Q1-Pad2)")
+    (add_net "Net-(U2-Pad11)")
+    (add_net "Net-(U2-Pad14)")
     (add_net SCL)
     (add_net SDA)
   )
