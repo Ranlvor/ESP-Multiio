@@ -195,12 +195,15 @@
     (add_net "Net-(JP-INTB1-Pad2)")
     (add_net "Net-(Q1-Pad1)")
     (add_net "Net-(Q1-Pad2)")
+    (add_net "Net-(U2-Pad11)")
+    (add_net "Net-(U2-Pad14)")
     (add_net SCL)
     (add_net SDA)
   )
 
-  (module logo:logo (layer B.Cu) (tedit 0) (tstamp 5CFB1BB0)
+  (module logo:logo (layer B.Cu) (tedit 0) (tstamp 5CFC04FE)
     (at 92 31 180)
+    (attr virtual)
     (fp_text reference G*** (at 0 0) (layer B.SilkS) hide
       (effects (font (size 1.524 1.524) (thickness 0.3)) (justify mirror))
     )
@@ -1346,8 +1349,9 @@
       (xy 0.482236 1.349785)) (layer B.SilkS) (width 0.01))
   )
 
-  (module logo:logo (layer F.Cu) (tedit 0) (tstamp 5CFB19E9)
+  (module logo:logo (layer F.Cu) (tedit 0) (tstamp 5CFC0376)
     (at 92 31)
+    (attr virtual)
     (fp_text reference G*** (at 0 0) (layer F.SilkS) hide
       (effects (font (size 1.524 1.524) (thickness 0.3)))
     )
