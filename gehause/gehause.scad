@@ -10,17 +10,25 @@ boardY = 68;
 boardZ = 1.6;
 spaceTop = 15;
 spaceBottom = 15;
+bottomThickness = 3;
+topBottomSplit = -5;
 margin = 5;
+cableDiameter = 2;
+washerDiameter = 7+2*tolerance;
+washerHeight = 1;
+screwHeadHeight = 5;
 
 
 mode = [
-      1, //normal Mode
-      0, //infill Mode
-      1, //support block Mode
-      1, //text Mode
+      1, //top normal Mode
+      0, //top infill Mode
+      0, //top support block Mode
+      0, //top text Mode
+      1, //bottom normal mode
+      0, //bottom infill mode
 ];
 //$fn = 96;
-
+//$fn=10;
 
 module switch() {
     cylinder(h=9,d=6+2*tolerance);
@@ -54,6 +62,16 @@ module mountingPole() {
     }
   }
 }
+
+module mountingScrewHole() {
+    mountingScrewDiameter = 6;
+    mountingScewHeadDiameter = 10;
+    hull() {
+        translate([0,+mountingScewHeadDiameter/2,-inf/2]) cylinder(h=inf, d=mountingScrewDiameter);
+        translate([0,-mountingScewHeadDiameter/2,-inf/2]) cylinder(h=inf, d=mountingScrewDiameter);
+    }
+    translate([0,-mountingScewHeadDiameter/2,-inf/2]) cylinder(h=inf, d=mountingScewHeadDiameter);
+}
 //color("green") cube([boardX, boardY, boardZ]);
 //mountingPole();
 if(mode[0]) {
@@ -67,10 +85,10 @@ if(mode[0]) {
         translate([boardX+margin,boardY+margin,boardZ+spaceTop-roundingRadius]) sphere(roundingRadius);
       
         //*
-        translate([-margin,      -margin,      0]) cylinder(r=roundingRadius);
-        translate([boardX+margin,-margin,      0]) cylinder(r=roundingRadius);
-        translate([-margin,      boardY+margin,0]) cylinder(r=roundingRadius);
-        translate([boardX+margin,boardY+margin,0]) cylinder(r=roundingRadius); // */
+        translate([-margin,        -margin,        topBottomSplit]) cylinder(r=roundingRadius);
+        translate([boardX+margin,-margin,        topBottomSplit]) cylinder(r=roundingRadius);
+        translate([-margin,        boardY+margin,topBottomSplit]) cylinder(r=roundingRadius);
+        translate([boardX+margin,boardY+margin,topBottomSplit]) cylinder(r=roundingRadius); // */
         }
       
   
@@ -92,6 +110,7 @@ if(mode[0]) {
     translate([        5,boardY-5,0]) cylinder(d=4, h=boardZ+spaceTop-2);
     translate([boardX-5,        5,0]) cylinder(d=4, h=boardZ+spaceTop-2);
     translate([boardX-5,boardY-5,0]) cylinder(d=4, h=boardZ+spaceTop-2);
+    translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=cableDiameter,h=inf);
   }
 }
 
@@ -120,4 +139,44 @@ color("white") if(mode[3]) {
     translate([9,boardY-5,spaceTop+boardZ-1]) linear_extrude(height = 2) text("0 A 1",size=5, halign="center");
     translate([19,boardY-10,spaceTop+boardZ-1]) linear_extrude(height = 2) text("A",size=5, halign="center");
     translate([26,boardY-10,spaceTop+boardZ-1]) linear_extrude(height = 2) text("1",size=5, halign="center");
+}
+
+module bottomMountingScrew() {
+    cylinder(d=washerDiameter,h=inf);
+    translate([0,0,inf/2]) cylinder(d=4,h=inf);
+    
+}
+color("blue") if (mode[4]) {
+    difference() {
+      hull() {
+          translate([-margin,        -margin,        topBottomSplit-1]) cylinder(r=roundingRadius,h=1);
+          translate([boardX+margin,-margin,        topBottomSplit-1]) cylinder(r=roundingRadius,h=1);
+          translate([-margin,        boardY+margin,topBottomSplit-1]) cylinder(r=roundingRadius,h=1);
+          translate([boardX+margin,boardY+margin,topBottomSplit-1]) cylinder(r=roundingRadius,h=1);
+          
+          translate([-margin,        -margin,        -spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
+          translate([boardX+margin,-margin,        -spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
+          translate([-margin,        boardY+margin,-spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
+          translate([boardX+margin,boardY+margin,-spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
+      }
+      translate([-tolerance,-tolerance,-spaceBottom]) cube([boardX+2*tolerance, boardY+2*tolerance, inf]);
+      translate([  boardX/4,3*boardY/4,0]) mountingScrewHole();
+      translate([3*boardX/4,3*boardY/4,0]) mountingScrewHole();
+      translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=cableDiameter,h=inf);
+      
+      translate([-washerDiameter/2, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
+      translate([washerDiameter/2+boardX, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
+      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
+      translate([-washerDiameter/2, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
+  }
+}
+
+color("green") if (mode[5]) {
+      translate([-washerDiameter/2, -washerDiameter/2,-inf/2]) cylinder(d=washerDiameter+5.4,h=inf);
+      translate([washerDiameter/2+boardX, -washerDiameter/2,-inf/2]) cylinder(d=washerDiameter+5.4,h=inf);
+      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-inf/2]) cylinder(d=washerDiameter+5.4,h=inf);
+      translate([-washerDiameter/2, washerDiameter/2+boardY,-inf/2]) cylinder(d=washerDiameter+5.4,h=inf);
+      translate([  boardX/4,3*boardY/4,0]) translate([0,+12/2,-inf/2]) cylinder(h=inf, d=12);
+      translate([3*boardX/4,3*boardY/4,0]) translate([0,+12/2,-inf/2]) cylinder(h=inf, d=12);
+    
 }
