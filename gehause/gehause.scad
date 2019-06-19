@@ -1,4 +1,5 @@
 
+//TODO: IR-Stuff
 
 tolerance = 0.2;
 epsilon = 0.001;
@@ -13,17 +14,19 @@ spaceBottom = 15;
 bottomThickness = 3;
 topBottomSplit = -5;
 margin = 5;
-cableDiameter = 2;
+cableDiameter = 4+2*tolerance;
 washerDiameter = 7+2*tolerance;
 washerHeight = 1;
 screwHeadHeight = 5;
-
+connectionDiameter = 7;
+connectionHeight = 5;
+cornerOnly = 0;
 
 mode = [
-      1, //top normal Mode
+      0, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
-      0, //top text Mode
+      1, //top text Mode
       1, //bottom normal mode
       0, //bottom infill mode
 ];
@@ -72,8 +75,8 @@ module mountingScrewHole() {
     }
     translate([0,-mountingScewHeadDiameter/2,-inf/2]) cylinder(h=inf, d=mountingScewHeadDiameter);
 }
-//color("green") cube([boardX, boardY, boardZ]);
-//mountingPole();
+
+module model() {
 if(mode[0]) {
   difference() {
     union() {
@@ -111,6 +114,17 @@ if(mode[0]) {
     translate([boardX-5,        5,0]) cylinder(d=4, h=boardZ+spaceTop-2);
     translate([boardX-5,boardY-5,0]) cylinder(d=4, h=boardZ+spaceTop-2);
     translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=cableDiameter,h=inf);
+    
+    
+    translate([-washerDiameter/2, -washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2*tolerance, h=connectionHeight+tolerance+epsilon);
+    translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2*tolerance, h=connectionHeight+tolerance+epsilon);
+    translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2*tolerance, h=connectionHeight+tolerance+epsilon);
+    translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2*tolerance, h=connectionHeight+tolerance+epsilon);
+    
+    translate([-washerDiameter/2, -washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
+    translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
+    translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
+    translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
   }
 }
 
@@ -126,6 +140,17 @@ color("green") if(mode[1]){
         translate([40,13+14*i,8+boardZ+tolerance]) rotate([0,0,180]) cylinder(d=3,h=10);
       }
     }
+    translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=2*cableDiameter,h=inf);
+    
+      translate([        5,        5,0])  cylinder(d=8, h=inf);
+      translate([        5,boardY-5,0])  cylinder(d=8, h=inf);
+      translate([boardX-5,        5,0])  cylinder(d=8, h=inf);
+      translate([boardX-5,boardY-5,0])  cylinder(d=8, h=inf);
+    
+        translate([-washerDiameter/2, -washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2, h=inf);
+    translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2, h=inf);
+    translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2, h=inf);
+    translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2, h=inf);
 }
 
 color("red") if(mode[2]) {
@@ -133,6 +158,11 @@ color("red") if(mode[2]) {
     translate([        5,boardY-5,-inf/2]) cylinder(d=4, h=inf);
     translate([boardX-5,        5,-inf/2]) cylinder(d=4, h=inf);
     translate([boardX-5,boardY-5,-inf/2]) cylinder(d=4, h=inf);
+    
+    translate([-washerDiameter/2, -washerDiameter/2,-inf/2]) cylinder(d=4, h=inf);
+    translate([washerDiameter/2+boardX,-washerDiameter/2,-inf/2]) cylinder(d=4, h=inf);
+    translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-inf/2]) cylinder(d=4, h=inf);
+    translate([-washerDiameter/2, washerDiameter/2+boardY,-inf/2]) cylinder(d=4, h=inf);
 }
 
 color("white") if(mode[3]) {
@@ -148,6 +178,7 @@ module bottomMountingScrew() {
 }
 color("blue") if (mode[4]) {
     difference() {
+      union() {
       hull() {
           translate([-margin,        -margin,        topBottomSplit-1]) cylinder(r=roundingRadius,h=1);
           translate([boardX+margin,-margin,        topBottomSplit-1]) cylinder(r=roundingRadius,h=1);
@@ -158,6 +189,11 @@ color("blue") if (mode[4]) {
           translate([boardX+margin,-margin,        -spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
           translate([-margin,        boardY+margin,-spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
           translate([boardX+margin,boardY+margin,-spaceBottom-bottomThickness]) cylinder(r=roundingRadius,h=1);
+      }
+      translate([-washerDiameter/2, -washerDiameter/2,topBottomSplit]) cylinder(d=connectionDiameter-2*tolerance, h=connectionHeight-tolerance);
+      translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit]) cylinder(d=connectionDiameter-2*tolerance, h=connectionHeight-tolerance);
+      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=connectionDiameter-2*tolerance, h=connectionHeight-tolerance);
+      translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=connectionDiameter-2*tolerance, h=connectionHeight-tolerance);
       }
       translate([-tolerance,-tolerance,-spaceBottom]) cube([boardX+2*tolerance, boardY+2*tolerance, inf]);
       translate([  boardX/4,3*boardY/4,0]) mountingScrewHole();
@@ -178,5 +214,15 @@ color("green") if (mode[5]) {
       translate([-washerDiameter/2, washerDiameter/2+boardY,-inf/2]) cylinder(d=washerDiameter+5.4,h=inf);
       translate([  boardX/4,3*boardY/4,0]) translate([0,+12/2,-inf/2]) cylinder(h=inf, d=12);
       translate([3*boardX/4,3*boardY/4,0]) translate([0,+12/2,-inf/2]) cylinder(h=inf, d=12);
-    
+      translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=2*cableDiameter,h=inf);
+}
+}
+
+if(cornerOnly) {
+    intersection() { 
+        model();
+        translate([-inf+2, -inf+2, -inf/2]) cube([inf,inf,inf]);
+    }
+} else {
+    model();
 }
