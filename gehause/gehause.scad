@@ -200,10 +200,10 @@ color("blue") if (mode[4]) {
       translate([3*boardX/4,3*boardY/4,0]) mountingScrewHole();
       translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=cableDiameter,h=inf);
       
-      translate([-washerDiameter/2, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
-      translate([washerDiameter/2+boardX, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
-      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
-      translate([-washerDiameter/2, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight]) bottomMountingScrew();
+      translate([-washerDiameter/2, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
+      translate([washerDiameter/2+boardX, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
+      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
+      translate([-washerDiameter/2, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
   }
 }
 
