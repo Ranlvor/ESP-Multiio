@@ -18,19 +18,19 @@ spaceTop = 15;
 spaceBottom = flatMode ? transistorHeight : 15;
 
 bottomThickness = 3;
-topBottomSplit = flatMode ? -1 : -5;
+topBottomSplit = flatMode ? 5 : -5;
 margin = 5;
 cableDiameter = 4+2*tolerance;
 washerDiameter = 7+2*tolerance;
 washerHeight = 1;
 screwHeadHeight = 5;
 connectionDiameter = 7;
-connectionHeight = 5;
+connectionHeight = (flatMode ? 2 : 5);
 cornerOnly = 0;
 screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 1 : 3);
 
 mode = [
-      0, //top normal Mode
+      1, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
       1, //top text Mode
@@ -70,8 +70,11 @@ module mountingPole() {
       translate([-dia/2,dia/2,boardZ]) cube([4,4,spaceTop-1]);
       translate([dia/2,-dia/2,boardZ]) cube([4,4,spaceTop-1]);
     }
+    translate([-inf/2,-inf/2,topBottomSplit-inf]) cube([inf,inf,inf]);
   }
+  translate([0,0,boardZ]) cylinder(d=dia, h=spaceTop-1);
 }
+
 
 module mountingScrewHole() {
     mountingScrewDiameter = 6;
@@ -128,10 +131,10 @@ if(mode[0]) {
     translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2*tolerance, h=connectionHeight+tolerance+epsilon);
     translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=connectionDiameter+2*tolerance, h=connectionHeight+tolerance+epsilon);
     
-    translate([-washerDiameter/2, -washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
-    translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
-    translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
-    translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit-epsilon]) cylinder(d=4, h=boardZ+spaceTop-2);
+    translate([-washerDiameter/2, -washerDiameter/2,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
+    translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
+    translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
+    translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
   }
 }
 
