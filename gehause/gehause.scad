@@ -5,14 +5,20 @@ tolerance = 0.2;
 epsilon = 0.001;
 inf = 100;
 
+//flat mode: ESP on the top instead of the bottom
+flatMode = 1;
+
+transistorHeight = 6;
+
 roundingRadius = 5;
 boardX = 75;
 boardY = 68;
 boardZ = 1.6;
 spaceTop = 15;
-spaceBottom = 15;
+spaceBottom = flatMode ? transistorHeight : 15;
+
 bottomThickness = 3;
-topBottomSplit = -5;
+topBottomSplit = flatMode ? -1 : -5;
 margin = 5;
 cableDiameter = 4+2*tolerance;
 washerDiameter = 7+2*tolerance;
@@ -21,6 +27,7 @@ screwHeadHeight = 5;
 connectionDiameter = 7;
 connectionHeight = 5;
 cornerOnly = 0;
+screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 1 : 3);
 
 mode = [
       0, //top normal Mode
@@ -196,14 +203,24 @@ color("blue") if (mode[4]) {
       translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=connectionDiameter-2*tolerance, h=connectionHeight-tolerance);
       }
       translate([-tolerance,-tolerance,-spaceBottom]) cube([boardX+2*tolerance, boardY+2*tolerance, inf]);
-      translate([  boardX/4,3*boardY/4,0]) mountingScrewHole();
-      translate([3*boardX/4,3*boardY/4,0]) mountingScrewHole();
+      if(flatMode == 1) {
+          translate([5*boardX/16,7*boardY/8,0]) mountingScrewHole();
+          translate([11*boardX/16,7*boardY/8,0]) mountingScrewHole();
+      } else {
+          translate([  boardX/4,3*boardY/4,0]) mountingScrewHole();
+          translate([3*boardX/4,3*boardY/4,0]) mountingScrewHole();
+      }
       translate([52, inf+boardX/2, topBottomSplit]) rotate([90,0,0]) cylinder(d=cableDiameter,h=inf);
       
-      translate([-washerDiameter/2, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
-      translate([washerDiameter/2+boardX, -washerDiameter/2,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
-      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
-      translate([-washerDiameter/2, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+washerHeight+screwHeadHeight+3]) bottomMountingScrew();
+      translate([-washerDiameter/2, -washerDiameter/2,-spaceBottom-inf-bottomThickness+screwHoleDepth]) bottomMountingScrew();
+      translate([washerDiameter/2+boardX, -washerDiameter/2,-spaceBottom-inf-bottomThickness+screwHoleDepth]) bottomMountingScrew();
+      translate([washerDiameter/2+boardX, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+screwHoleDepth]) bottomMountingScrew();
+      translate([-washerDiameter/2, washerDiameter/2+boardY,-spaceBottom-inf-bottomThickness+screwHoleDepth]) bottomMountingScrew();
+      
+      //space for transistor
+      if(flatMode) {
+          translate([60.67, 45.72, -spaceBottom-bottomThickness+1]) translate([-5,-5,0]) cube([10,10,10]);
+      }
   }
 }
 
