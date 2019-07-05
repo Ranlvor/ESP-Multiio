@@ -31,13 +31,13 @@ connectionHeight = (flatMode ? 2 : 5);
 cornerOnly = 0;
 screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 6 : 3);
 
-cutMode = 1;
+cutMode = 0;
 
 mode = [
       1, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
-      0, //top text Mode
+      1, //top text Mode
       1, //bottom normal mode
       0, //bottom infill mode
 ];
@@ -144,6 +144,8 @@ if(mode[0]) {
     translate([washerDiameter/2+boardX,-washerDiameter/2,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
     translate([washerDiameter/2+boardX, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
     translate([-washerDiameter/2, washerDiameter/2+boardY,topBottomSplit]) cylinder(d=4, h=boardZ+spaceTop-2-topBottomSplit);
+    
+    labels();
   }
 }
 
@@ -184,10 +186,13 @@ color("red") if(mode[2]) {
     translate([-washerDiameter/2, washerDiameter/2+boardY,-inf/2]) cylinder(d=4, h=inf);
 }
 
+module labels() {
+    translate([9,boardY-5,spaceTop+boardZ-1]) linear_extrude(height = 1) text("0 A 1",size=5, halign="center");
+    translate([19,boardY-10,spaceTop+boardZ-1]) linear_extrude(height = 1) text("A",size=5, halign="center");
+    translate([26,boardY-10,spaceTop+boardZ-1]) linear_extrude(height = 1) text("1",size=5, halign="center");
+}
 color("white") if(mode[3]) {
-    translate([9,boardY-5,spaceTop+boardZ-1]) linear_extrude(height = 2) text("0 A 1",size=5, halign="center");
-    translate([19,boardY-10,spaceTop+boardZ-1]) linear_extrude(height = 2) text("A",size=5, halign="center");
-    translate([26,boardY-10,spaceTop+boardZ-1]) linear_extrude(height = 2) text("1",size=5, halign="center");
+    labels();
 }
 
 module bottomMountingScrew() {
