@@ -6,7 +6,7 @@ main_flat: output/flat-t-main.stl output/flat-t-infill.stl output/flat-t-blocker
 
 corner_flat: output/flat-co-t-main.stl output/flat-co-t-infill.stl output/flat-co-t-blocker.stl output/flat-co-t-text.stl output/flat-co-b-main.stl output/flat-co-b-infill.stl
 
-cut_files: cuts/flat-top-1.png cuts/flat-top-2.png cuts/flat-top-3.png cuts/flat-bottom-1.png cuts/flat-bottom-2.png cuts/flat-bottom-3.png cuts/top-1.png cuts/top-2.png cuts/top-3.png cuts/bottom-1.png cuts/bottom-2.png cuts/bottom-3.png
+cut_files: cuts/combined-1.png cuts/combined-2.png cuts/combined-3.png cuts/flat-combined-1.png cuts/flat-combined-2.png cuts/flat-combined-3.png
 
 all: main corner main_flat corner_flat cut_files
 
@@ -125,49 +125,67 @@ cuts:
 	mkdir cuts
 
 cuts/flat-top-1.png: gehause.scad cuts
-	openscad -o $@ -D flatMode=1 -D cutMode=1 -D mode='[1,0,0,0]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=1 -D cutMode=1 -D mode='[1,0,0,0]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/flat-top-2.png: gehause.scad cuts
-	openscad -o $@ -D flatMode=1 -D cutMode=2 -D mode='[1,0,0,0]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=1 -D cutMode=2 -D mode='[1,0,0,0]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/flat-top-3.png: gehause.scad cuts
-	openscad -o $@ -D flatMode=1 -D cutMode=3 -D mode='[1,0,0,0]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=1 -D cutMode=3 -D mode='[1,0,0,0]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/flat-bottom-1.png: gehause.scad cuts
-	openscad -o $@ -D flatMode=1 -D cutMode=1 -D mode='[0,0,0,0,1]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=1 -D cutMode=1 -D mode='[0,0,0,0,1]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/flat-bottom-2.png: gehause.scad cuts
-	openscad -o $@ -D flatMode=1 -D cutMode=2 -D mode='[0,0,0,0,1]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=1 -D cutMode=2 -D mode='[0,0,0,0,1]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/flat-bottom-3.png: gehause.scad cuts
-	openscad -o $@ -D flatMode=1 -D cutMode=3 -D mode='[0,0,0,0,1]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=1 -D cutMode=3 -D mode='[0,0,0,0,1]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/top-1.png: gehause.scad cuts
-	openscad -o $@ -D cutMode=1 -D mode='[1,0,0,0]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=0 -D cutMode=1 -D mode='[1,0,0,0]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/top-2.png: gehause.scad cuts
-	openscad -o $@ -D cutMode=2 -D mode='[1,0,0,0]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=0 -D cutMode=2 -D mode='[1,0,0,0]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/top-3.png: gehause.scad cuts
-	openscad -o $@ -D cutMode=3 -D mode='[1,0,0,0]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=0 -D cutMode=3 -D mode='[1,0,0,0]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/bottom-1.png: gehause.scad cuts
-	openscad -o $@ -D cutMode=1 -D mode='[0,0,0,0,1]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=0 -D cutMode=1 -D mode='[0,0,0,0,1]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/bottom-2.png: gehause.scad cuts
-	openscad -o $@ -D cutMode=2 -D mode='[0,0,0,0,1]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=0 -D cutMode=2 -D mode='[0,0,0,0,1]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
 
 cuts/bottom-3.png: gehause.scad cuts
-	openscad -o $@ -D cutMode=3 -D mode='[0,0,0,0,1]' --camera=0,0,0,0,0,0,240 --projection=o gehause.scad
+	openscad -o $@ -D flatMode=0 -D cutMode=3 -D mode='[0,0,0,0,1]' -D '$$fn = 96' --camera=0,0,0,0,0,0,150 --projection=o --imgsize=1920,1080 gehause.scad
 	echo $@ done
+
+cuts/combined-1.png: cuts/top-1.png cuts/bottom-1.png
+	convert cuts/bottom-1.png -transparent '#ffffe5' -negate -alpha set -channel A -evaluate Multiply 0.75 +channel "(" cuts/top-1.png -transparent '#ffffe5' -channel A -evaluate Multiply 0.75 +channel ")" -composite -flatten $@
+
+cuts/combined-2.png: cuts/top-2.png cuts/bottom-2.png
+	convert cuts/bottom-2.png -transparent '#ffffe5' -negate -alpha set -channel A -evaluate Multiply 0.75 +channel "(" cuts/top-2.png -transparent '#ffffe5' -channel A -evaluate Multiply 0.75 +channel ")" -composite -flatten $@
+
+cuts/combined-3.png: cuts/top-3.png cuts/bottom-3.png
+	convert cuts/bottom-3.png -transparent '#ffffe5' -negate -alpha set -channel A -evaluate Multiply 0.75 +channel "(" cuts/top-3.png -transparent '#ffffe5' -channel A -evaluate Multiply 0.75 +channel ")" -composite -flatten $@
+
+cuts/flat-combined-1.png: cuts/flat-top-1.png cuts/flat-bottom-1.png
+	convert cuts/flat-bottom-1.png -transparent '#ffffe5' -negate -alpha set -channel A -evaluate Multiply 0.75 +channel "(" cuts/flat-top-1.png -transparent '#ffffe5' -channel A -evaluate Multiply 0.75 +channel ")" -composite -flatten $@
+
+cuts/flat-combined-2.png: cuts/flat-top-2.png cuts/flat-bottom-2.png
+	convert cuts/flat-bottom-2.png -transparent '#ffffe5' -negate -alpha set -channel A -evaluate Multiply 0.75 +channel "(" cuts/flat-top-2.png -transparent '#ffffe5' -channel A -evaluate Multiply 0.75 +channel ")" -composite -flatten $@
+
+cuts/flat-combined-3.png: cuts/flat-top-3.png cuts/flat-bottom-3.png
+	convert cuts/flat-bottom-3.png -transparent '#ffffe5' -negate -alpha set -channel A -evaluate Multiply 0.75 +channel "(" cuts/flat-top-3.png -transparent '#ffffe5' -channel A -evaluate Multiply 0.75 +channel ")" -composite -flatten $@

@@ -29,7 +29,7 @@ connectionHeight = (flatMode ? 2 : 5);
 cornerOnly = 0;
 screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 1 : 3);
 
-cutMode = 2;
+cutMode = 0;
 
 mode = [
       1, //top normal Mode
@@ -249,10 +249,10 @@ if(cornerOnly) {
     if(cutMode == 0) {
       model();
     } else if(cutMode == 1) {
-      projection(cut = true) translate([0,-boardY/2,washerDiameter/2]) rotate([0,-90,0]) model();
+      rotate([0,0,-90]) projection(cut = true) translate([0,-boardY/2,washerDiameter/2]) rotate([0,-90,0]) model();
     } else if(cutMode == 2) {
-      projection(cut = true) translate([0,-boardY/2,-5]) rotate([0,-90,0]) model();
+      rotate([0,0,-90]) projection(cut = true) translate([0,-boardY/2,-5]) rotate([0,-90,0]) model();
     } else if(cutMode == 3) {
-      projection(cut = true) translate([0,-boardY/2,-9]) rotate([0,-90,0]) model();
+      rotate([0,0,-90]) projection(cut = true) translate([0,-boardY/2,-9]) rotate([0,-90,0]) model();
     }
 }
