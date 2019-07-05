@@ -29,12 +29,12 @@ screwHeadHeight = 5;
 connectionDiameter = 7;
 connectionHeight = (flatMode ? 2 : 5);
 cornerOnly = 0;
-screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 1 : 3);
+screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 6 : 3);
 
 cutMode = 1;
 
 mode = [
-      0, //top normal Mode
+      1, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
       0, //top text Mode
