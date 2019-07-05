@@ -1,7 +1,7 @@
-
+ 
 //TODO: IR-Stuff
 
-tolerance = 0.2;
+tolerance = 0.3;
 epsilon = 0.001;
 inf = 100;
 
@@ -29,12 +29,14 @@ connectionHeight = (flatMode ? 2 : 5);
 cornerOnly = 0;
 screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 1 : 3);
 
+cutMode = 2;
+
 mode = [
       1, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
-      1, //top text Mode
-      1, //bottom normal mode
+      0, //top text Mode
+      0, //bottom normal mode
       0, //bottom infill mode
 ];
 //$fn = 96;
@@ -244,5 +246,13 @@ if(cornerOnly) {
         translate([-inf+2, -inf+2, -inf/2]) cube([inf,inf,inf]);
     }
 } else {
-    model();
+    if(cutMode == 0) {
+      model();
+    } else if(cutMode == 1) {
+      projection(cut = true) translate([0,-boardY/2,washerDiameter/2]) rotate([0,-90,0]) model();
+    } else if(cutMode == 2) {
+      projection(cut = true) translate([0,-boardY/2,-5]) rotate([0,-90,0]) model();
+    } else if(cutMode == 3) {
+      projection(cut = true) translate([0,-boardY/2,-9]) rotate([0,-90,0]) model();
+    }
 }
