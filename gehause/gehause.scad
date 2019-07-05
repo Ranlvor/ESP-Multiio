@@ -1,7 +1,9 @@
  
 //TODO: IR-Stuff
+//TODO: Abrundung oben weg-option
 
 tolerance = 0.3;
+layer_hight = 0.2;
 epsilon = 0.001;
 inf = 100;
 
@@ -29,20 +31,22 @@ connectionHeight = (flatMode ? 2 : 5);
 cornerOnly = 0;
 screwHoleDepth = washerHeight + screwHeadHeight + (flatMode ? 1 : 3);
 
-cutMode = 0;
+cutMode = 1;
 
 mode = [
-      1, //top normal Mode
+      0, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
       0, //top text Mode
-      0, //bottom normal mode
+      1, //bottom normal mode
       0, //bottom infill mode
 ];
 //$fn = 96;
 //$fn=10;
 
 module switch() {
+ difference() {
+  union() {
     cylinder(h=9,d=6+2*tolerance);
     translate([0,0,9-5]) {
         cylinder(h=1+tolerance,d=12+2*tolerance);
@@ -57,6 +61,9 @@ module switch() {
     //translate([0,0,9]) cylinder(d=3, h=11);
     translate([0,0,9]) rotate([0,12,0]) cylinder(d=3, h=11);
     translate([0,0,9]) rotate([0,-12,0]) cylinder(d=3, h=11);
+  }
+  translate([0,0,9-5-layer_hight]) cylinder(h=layer_hight,d=6+2*tolerance);
+ }
 }
 
 module led() {
