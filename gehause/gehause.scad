@@ -101,10 +101,10 @@ if(mode[0]) {
     union() {
       difference() {
         hull() {
-        translate([-margin,        -margin,        boardZ+spaceTop-roundingRadius]) sphere(roundingRadius);
-        translate([boardX+margin,-margin,        boardZ+spaceTop-roundingRadius]) sphere(roundingRadius);
-        translate([-margin,        boardY+margin,boardZ+spaceTop-roundingRadius]) sphere(roundingRadius);
-        translate([boardX+margin,boardY+margin,boardZ+spaceTop-roundingRadius]) sphere(roundingRadius);
+        translate([-margin,        -margin,        boardZ+spaceTop-roundingRadius]) cylinder(h=roundingRadius, r1=roundingRadius, r2=0);
+        translate([boardX+margin,-margin,        boardZ+spaceTop-roundingRadius]) cylinder(h=roundingRadius, r1=roundingRadius, r2=0);
+        translate([-margin,        boardY+margin,boardZ+spaceTop-roundingRadius]) cylinder(h=roundingRadius, r1=roundingRadius, r2=0);
+        translate([boardX+margin,boardY+margin,boardZ+spaceTop-roundingRadius]) cylinder(h=roundingRadius, r1=roundingRadius, r2=0);
       
         //*
         translate([-margin,        -margin,        topBottomSplit]) cylinder(r=roundingRadius);
