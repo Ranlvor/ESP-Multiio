@@ -10,6 +10,12 @@ cut_files: cuts/combined-1.png cuts/combined-2.png cuts/combined-3.png cuts/flat
 
 all: main corner main_flat corner_flat cut_files
 
+preview.png: gehause.scad 
+	openscad -o $@ -D flatMode=0 -D mode='[1,0,0,1,1,0]' -D '$$fn = 96' gehause.scad --imgsize=1920,1080 || true
+
+flat-preview.png: gehause.scad
+	openscad -o $@ -D flatMode=1 -D mode='[1,0,0,1,1,0]' -D '$$fn = 96' gehause.scad --imgsize=1920,1080 || true
+
 output/t-main.stl: gehause.scad output
 	openscad -o $@ -D flatMode=0 -D mode='[1,0,0,0]' -D '$$fn = 96' gehause.scad || true
 	@echo $@ done
@@ -33,9 +39,6 @@ output/b-main.stl: gehause.scad output
 output/b-infill.stl: gehause.scad output
 	openscad -o $@ -D flatMode=0 -D mode='[0,0,0,0,0,1]' -D '$$fn = 96' gehause.scad || true
 	@echo $@ done
-
-preview.png: gehause.scad 
-	openscad -o $@ -D flatMode=0 -D mode='[1,0,0,1,1,0]' -D '$$fn = 96' gehause.scad || true
 
 
 output/co-t-main.stl: gehause.scad output
@@ -89,9 +92,6 @@ output/flat-b-main.stl: gehause.scad output
 output/flat-b-infill.stl: gehause.scad output
 	openscad -o $@ -D flatMode=1 -D mode='[0,0,0,0,0,1]' -D '$$fn = 96' gehause.scad || true
 	@echo $@ done
-
-flat-preview.png: gehause.scad
-	openscad -o $@ -D flatMode=1 -D mode='[1,0,0,1,1,0]' -D '$$fn = 96' gehause.scad || true
 
 
 output/flat-co-t-main.stl: gehause.scad output
