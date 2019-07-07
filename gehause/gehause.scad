@@ -1,6 +1,5 @@
  
 //TODO: IR-Stuff
-//TODO: Abrundung oben weg-option
 
 tolerance = 0.3;
 layer_hight = 0.2;
@@ -12,7 +11,7 @@ flatMode = 1;
 
 transistorHeight = 6;
 
-roundingRadius = 5;
+roundingRadius = 2;
 boardX = 75;
 boardY = 68;
 boardZ = 1.6;
@@ -21,7 +20,7 @@ spaceBottom = flatMode ? transistorHeight : 15;
 
 bottomThickness = 3;
 topBottomSplit = flatMode ? 5 : -5;
-margin = 5;
+margin = 7;
 cableDiameter = 4+2*tolerance;
 washerDiameter = 7+2*tolerance;
 washerHeight = 1;

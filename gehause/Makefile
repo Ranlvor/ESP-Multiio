@@ -34,7 +34,7 @@ output/b-infill.stl: gehause.scad output
 	openscad -o $@ -D flatMode=0 -D mode='[0,0,0,0,0,1]' -D '$$fn = 96' gehause.scad || true
 	@echo $@ done
 
-preview.png: 
+preview.png: gehause.scad 
 	openscad -o $@ -D flatMode=0 -D mode='[1,0,0,1,1,0]' -D '$$fn = 96' gehause.scad || true
 
 
@@ -90,7 +90,7 @@ output/flat-b-infill.stl: gehause.scad output
 	openscad -o $@ -D flatMode=1 -D mode='[0,0,0,0,0,1]' -D '$$fn = 96' gehause.scad || true
 	@echo $@ done
 
-flat-preview.png: 
+flat-preview.png: gehause.scad
 	openscad -o $@ -D flatMode=1 -D mode='[1,0,0,1,1,0]' -D '$$fn = 96' gehause.scad || true
 
 
