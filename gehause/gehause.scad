@@ -1,6 +1,4 @@
  
-//TODO: IR-Stuff
-
 tolerance = 0.3;
 layer_hight = 0.2;
 epsilon = 0.001;
@@ -36,8 +34,8 @@ mode = [
       1, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
-      1, //top text Mode
-      1, //bottom normal mode
+      0, //top text Mode
+      0, //bottom normal mode
       0, //bottom infill mode
 ];
 //$fn = 96;
@@ -121,6 +119,8 @@ if(mode[0]) {
           translate([19,13+14*i,boardZ+spaceTop]) led();
           translate([26,13+14*i,boardZ+spaceTop]) led();
         }
+        //IR-LED
+        translate([boardX-23,boardY-5,boardZ+spaceTop]) led();
       }
       translate([        5,        5,0]) rotate([0,0,180]) mountingPole();
       translate([        5,boardY-5,0]) rotate([0,0, 90]) mountingPole();
@@ -258,7 +258,9 @@ if(cornerOnly) {
     }
 } else {
     if(cutMode == 0) {
+      //rotate([180,0,0])  intersection() {
       model();
+      //translate([9   -20/2       ,13+14*0   -17/2,   10+boardZ+tolerance-3]) cube([18,16,10]);}
     } else if(cutMode == 1) {
       rotate([0,0,-90]) projection(cut = true) translate([0,-boardY/2,washerDiameter/2]) rotate([0,-90,0]) model();
     } else if(cutMode == 2) {
