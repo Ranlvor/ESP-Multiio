@@ -4,14 +4,12 @@ layer_hight = 0.2;
 epsilon = 0.001;
 inf = 100;
 
-transistorHeight = 6;
-
 roundingRadius = 2;
 boardX = 75;
 boardY = 68;
 boardZ = 1.6;
 spaceTop = 15;
-spaceBottom = transistorHeight;
+spaceBottom = 5;
 
 bottomThickness = 3;
 topBottomSplit = 5;
@@ -28,11 +26,11 @@ screwHoleDepth = washerHeight + screwHeadHeight + 6;
 cutMode = 0;
 
 mode = [
-      1, //top normal Mode
+      0, //top normal Mode
       0, //top infill Mode
       0, //top support block Mode
       0, //top text Mode
-      0, //bottom normal mode
+      1, //bottom normal mode
       0, //bottom infill mode
 ];
 //$fn = 96;
